@@ -17,6 +17,15 @@ let users: User[] = [
   { id: 2, name: "Bob", email: "bob@example.com" },
 ];
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date() });
+});
+
 // GET all users
 app.get("/users", (req: Request, res: Response) => {
   res.status(200).json({
